@@ -47,7 +47,7 @@ public class FDataAnggota extends javax.swing.JFrame {
     private void load_data()
     {
         Connection kon = Koneksi.koneksiDb();
-        Object header[]={"ID ANGGOTA","NIS","NAMA ANGGOTA","JK","TINGKAT","JURUSAN","KELAS","NO HP","STATUS"};
+        Object header[]={"ID ANGGOTA","NIM","NAMA","JK","TINGKAT","JURUSAN","KELAS","NO HP","STATUS"};
         DefaultTableModel data= new DefaultTableModel(null,header);
         TabelAnggota.setModel(data);
         String sql="SELECT * FROM tbl_anggota";
@@ -84,7 +84,7 @@ public class FDataAnggota extends javax.swing.JFrame {
     {
         
           Connection kon = Koneksi.koneksiDb();
-            Object header[]={"ID ANGGOTA","NIS","NAMA ANGGOTA","JK","TINGKAT","JURUSAN","KELAS","NO HP","STATUS"};
+            Object header[]={"ID ANGGOTA","NIM","NAMA","JK","TINGKAT","JURUSAN","KELAS","NO HP","STATUS"};
             DefaultTableModel data= new DefaultTableModel(null,header);
             TabelAnggota.setModel(data);
             String sql="SELECT * FROM tbl_anggota WHERE id_anggota LIKE '%"+TCARI.getText()
@@ -175,7 +175,7 @@ public class FDataAnggota extends javax.swing.JFrame {
     private javax.swing.JComboBox KKELAS;
     private javax.swing.JComboBox KTINGKAT;
     private javax.swing.JTextField NAMA;
-    private javax.swing.JTextField NIS;
+    private javax.swing.JTextField NIM;
     private javax.swing.JTextField NJURUSAN;
     private javax.swing.JTextField NOPE;
     private javax.swing.JTextField NTINGKAT;
