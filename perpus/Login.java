@@ -2,14 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package tubes;
-
+package tubesperpustakaan;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author asus
@@ -48,7 +46,6 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 153, 153));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -145,38 +142,52 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameActionPerformed
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-         try {
-            st = cn.createStatement();
-            sql = "SELECT * FROM Registrasi WHERE username='"+username.getText()+"' AND password='"+password.getText()+"'";
-            rs = st.executeQuery(sql);
-            
-            if(rs.next()){
-                if(username.getText().equals(rs.getString("username")) && password.getText().equals(rs.getString("password"))){
-                    JOptionPane.showMessageDialog(null, "berhasil login");
-                    this.setVisible(false);
-                }
-            }else{
-                    JOptionPane.showMessageDialog(null, "username atau password salah");
-                }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
+        try {
+        st = cn.createStatement();
+        sql = "SELECT * FROM registrasi WHERE username='" + username.getText() + "' AND password='" + password.getText() + "'";
+        rs = st.executeQuery(sql);
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
+        if (rs.next()) {
+            JOptionPane.showMessageDialog(null, "Berhasil login sebagai pengguna");
+            // Tampilkan menu pengguna jika berhasil login sebagai pengguna biasa
+            MenuUtama menuUtama = new MenuUtama();
+            menuUtama.setVisible(true);
+            this.setVisible(false); // Sembunyikan layar login setelah login berhasil
+        } else {
+            // Jika tidak ditemukan di tabel Registrasi, cek di tabel Admin
+            st = cn.createStatement();
+            sql = "SELECT * FROM admin WHERE username='" + username.getText() + "' AND password='" + password.getText() + "'";
+            rs = st.executeQuery(sql);
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Berhasil login sebagai admin");
+                // Tampilkan menu admin jika berhasil login sebagai admin
+                MenuAdmin menuAdmin = new MenuAdmin();
+                menuAdmin.setVisible(true);
+                this.setVisible(false); // Sembunyikan layar login setelah login berhasil
+            } else {
+                JOptionPane.showMessageDialog(null, "Username atau password salah");
+            }
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
         MenuAwal menuAwal = new MenuAwal();
         menuAwal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnkembaliActionPerformed
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordActionPerformed
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
 
     /**
      * @param args the command line arguments
