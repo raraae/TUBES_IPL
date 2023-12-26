@@ -149,7 +149,7 @@ public class Login extends javax.swing.JFrame {
         rs = st.executeQuery(sql);
 
         if (rs.next()) {
-            JOptionPane.showMessageDialog(null, "Berhasil login sebagai pengguna");
+            JOptionPane.showMessageDialog(null, "Berhasil login!");
             // Tampilkan menu pengguna jika berhasil login sebagai pengguna biasa
             MenuUtama menuUtama = new MenuUtama();
             menuUtama.setVisible(true);
@@ -161,7 +161,7 @@ public class Login extends javax.swing.JFrame {
             rs = st.executeQuery(sql);
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Berhasil login sebagai admin");
+                JOptionPane.showMessageDialog(null, "Berhasil login sebagai admin!");
                 // Tampilkan menu admin jika berhasil login sebagai admin
                 MenuAdmin menuAdmin = new MenuAdmin();
                 menuAdmin.setVisible(true);
